@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .transition-open {
+  transition: all 0.3s linear;
+  
+} */
+.transition-close {
+  display: none;
+}
+.transition-call {
+  transition: all 9s linear;
+}

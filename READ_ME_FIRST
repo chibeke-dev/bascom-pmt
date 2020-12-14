@@ -1,0 +1,14 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!PLEASE🙏🙏 READ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+this is front end arena.
+
+Please since its only front end all info will be listed here🙏 
+--majorly we are working in the source(~src/~) folder.
+
+--components go into the components folder
+--pages folder contains all pages(pages created from the components)
+--other files such as actions(for communicating with backend) and reducers(where the actual state goes and check actions)
+--if you dont understand the last point dont worry i'll explain after we learn redux and i did not add it here yet
+-- we have react router installed, we have Material UI installed
+
+Happy Hacking!😎
