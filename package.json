@@ -22,6 +22,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "builds": "react-scripts build",
     "test": "craco test",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
