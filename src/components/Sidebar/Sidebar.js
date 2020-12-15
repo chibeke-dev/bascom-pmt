@@ -1,15 +1,21 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { HiBell, HiCog, HiEyeOff, HiHome } from "react-icons/hi";
 import { MdAssignment } from "react-icons/md";
 import SidebarIcon from "./SidebarIcon";
-import Divider from "../Divider";
-import { Avatar } from "../Avatar";
+import Divider from "../utilities/Divider";
+import { Avatar } from "../utilities/Avatar";
+
+/**
+ * #### Sidebar component
+ * Sidebar is set to be scrollable always set
+ * the wrapping container so match your need.
+ * usage: `<Sidebar />`
+ */
 class Sidebar extends Component {
   triggerHover() {}
   render() {
     return (
-      <div className="flex flex-col items-center shadow-md py-4 flex-shrink-0 w-20 bg-white-800 h-screen sticky overflow-y-hidden">
+      <div className="flex flex-col items-center shadow-md py-4 flex-shrink-0 md:w-20 w-14 bg-white-800 h-screen sticky overflow-y-hidden">
         <ul className="flex flex-col space-y-2 mt-12 mb-5">
           <span className="">
             <Avatar name="maxwell diogu uche" color="green" size="1" />

@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "bascom-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,7 +22,6 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "builds": "react-scripts build",
     "test": "craco test",
     "docz:dev": "docz dev",
     "docz:build": "docz build",

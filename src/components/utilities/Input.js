@@ -15,9 +15,11 @@ class Input extends Component {
     return (
       <div>
         <input
-          type="text"
-          placeholder="your name"
-          className="mx-3 my-2 border border-gray-500 rounded-md px-2 py-2"
+          {...this.props}
+          className={
+            this.props.className +
+            "mx-3 my-2 border border-gray-500 rounded-md px-2 py-2 focus:outline-none"
+          }
         />
       </div>
     );

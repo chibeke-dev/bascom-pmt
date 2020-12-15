@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "./Home";
+import DashboardHome from "./Index";
 import MyTasks from "./MyTasks";
 import Notifications from "./Notifications";
 import Settings from "./Settings";
@@ -10,11 +10,11 @@ export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" component={DashboardHome} />
         <Route path="/private/components" exact component={Components} />
-        <Route path="/i/my-task" exact component={MyTasks} />
-        <Route path="/settings" exact component={Settings} />
-        <Route path="/i/notifications" exact component={Notifications} />
+        <Route path="/i/my-task" component={MyTasks} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/i/notifications" component={Notifications} />
       </Switch>
     );
   }

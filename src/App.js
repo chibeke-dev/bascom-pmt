@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 // import Components from "./components/Components";
 import { Sidebar } from "./components/Sidebar";
-import Routes from "./pages/Routes";
+import Routes from "./dashboardPages/Routes";
 
 function App() {
   return (

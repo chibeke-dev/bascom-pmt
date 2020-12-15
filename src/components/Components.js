@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Input from "./Input";
-import Badge from "./Badge";
-import Divider from "./Divider";
-import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
-import Searchbar from "./Searchbar";
-import Sidebar from "./Sidebar/Sidebar";
-import { Avatar } from "./Avatar/";
-import Button from "./Button/Button";
+import Input from "./utilities/Input";
+import Badge from "./utilities/Badge";
+import Divider from "./utilities/Divider";
+import Breadcrumbs from "./utilities/Breadcrumbs/Breadcrumbs";
+import Searchbar from "./utilities/Searchbar";
+import { Avatar } from "./utilities/Avatar";
+import Button from "./utilities/Button/Button";
 
 class Components extends Component {
   render() {
