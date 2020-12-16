@@ -10,7 +10,7 @@ export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/" component={DashboardHome} />
+        <Route path="/" exact component={DashboardHome} />
         <Route path="/private/components" exact component={Components} />
         <Route path="/i/my-task" component={MyTasks} />
         <Route path="/settings" component={Settings} />
