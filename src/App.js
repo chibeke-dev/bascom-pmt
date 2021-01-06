@@ -1,18 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-// import Components from "./components/Components";
-import { Sidebar } from "./components/Sidebar";
-import Routes from "./dashboardPages/Routes";
+import "rsuite/dist/styles/rsuite-default.css";
+import Application from "./pages/dashboardPages/Index";
+import Login from "./pages/auth/Login";
+import Landing from "./pages/landingPages/Index";
 
+const state = {
+	isLoggedIn: false,
+};
 function App() {
-  return (
-    <Router>
-      <div className="flex h-sreen overflow-y-hidden app">
-        <Sidebar />
-        <Routes />
-      </div>
-    </Router>
-  );
+	return <Router>{state.isLoggedIn ? <Application /> : <Landing />}</Router>;
 }
 
 export default App;

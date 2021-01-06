@@ -36,14 +36,16 @@ class Accordion extends Component {
         </button>
         <div className="border-black border-t-2 opacity-30"></div>
 
-        <div
-          className={`${
-            this.state.accordIsOpen === true
-              ? "transition-open"
-              : "transition-close"
-          } bg-white ml-9 mt-3 px-1 transition-call flex flex-wrap  py-1 rounded-lg text-gray-600`}
-        >
-          {children}
+        <div className="transition-all ease-in-out duration-500">
+          <div
+            className={`${
+              this.state.accordIsOpen === true
+                ? "transition-open"
+                : "transition-close ease-in-out duration-500"
+            } bg-white ml-9 mt-3 px-1  flex flex-wrap  py-1 rounded-lg text-gray-600`}
+          >
+            {children}
+          </div>
         </div>
       </div>
     );

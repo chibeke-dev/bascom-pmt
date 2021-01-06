@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Popover from "react-tiny-popover";
 
+/**
+ * #### Avatar
+ * Avatar generates a name initial using the Firstname and Surname
+ * any third name specified will be ignore(for the purpose of initials).
+ *
+ * Usage:
+ * ```
+ * <Avatar name="firstname surname" to='/profile' />
+ * ```
+ * You can also specify color and size(1 or 2)
+ * if no size is specified the defaults take over
+ */
 class Avatar extends Component {
-  state = {
-    isPopoverOpen: false,
-  };
-
   getInitial = (name) => {
     let full_name = name.split(" ");
     let initial1 = full_name[0].substring(0, 1).toUpperCase();
@@ -20,17 +27,19 @@ class Avatar extends Component {
   };
 
   render() {
-    const { name, color, size } = this.props;
+    const { name, color, size, to } = this.props;
     return (
-      <div
-        className={`flex items-center justify-center h-${
-          size === "1" ? 12 : 9
-        } w-${
-          size === "1" ? 12 : 9
-        } rounded-full bg-${color}-500 text-white font-bold flex-shrink-0`}
-      >
-        {this.getInitial(name)}
-      </div>
+      <Link to={to}>
+        <div
+          className={`flex items-center justify-center h-${
+            size === "1" ? 12 : 9
+          } w-${
+            size === "1" ? 12 : 9
+          } rounded-full bg-${color}-500 text-white font-bold flex-shrink-0`}
+        >
+          {this.getInitial(name)}
+        </div>
+      </Link>
     );
   }
 }

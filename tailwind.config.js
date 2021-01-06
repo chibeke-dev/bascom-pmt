@@ -3,6 +3,11 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   purge: [],
   presets: [],
+  extend: {
+    backgroundColor: ["active"],
+    textColor: ["active"],
+    borderColor: ["active"],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
