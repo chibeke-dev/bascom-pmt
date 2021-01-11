@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import loginImg from "../../img/login.jpg";
 import logoMain from "../landingPages/assets/images/Logo.png";
 import Image from "../landingPages/components/elements/Image";
 
@@ -8,7 +7,6 @@ import {
 	FormGroup,
 	FormControl,
 	ControlLabel,
-	HelpBlock,
 	Schema,
 	ButtonToolbar,
 	Button,
@@ -17,6 +15,7 @@ import { Link, Redirect } from "react-router-dom";
 
 const { StringType } = Schema.Types;
 
+// schema for validation provided by rsuites
 const model = Schema.Model({
 	email: StringType()
 		.isEmail("Please enter a valid email address.")
@@ -24,6 +23,7 @@ const model = Schema.Model({
 	password: StringType().isRequired("This field is required."),
 });
 
+// Input field component to be used in login component
 class TextField extends React.PureComponent {
 	render() {
 		const { name, label, accepter, ...props } = this.props;
@@ -36,6 +36,7 @@ class TextField extends React.PureComponent {
 	}
 }
 
+// main login component
 export class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -50,19 +51,21 @@ export class Login extends Component {
 		this.handleCheckEmail = this.handleCheckEmail.bind(this);
 	}
 
+	// handles form submition
 	handleSubmit() {
 		const { formValue } = this.state;
 		if (!this.form.check()) {
 			console.error("Form Error");
 			return;
 		}
+		//TODO: adjust `!this.fom.check()` to return a radable message by users
 		if (!this.form.check()) {
 			console.log("invalid user");
 		} else {
 			return <Redirect to="/" />;
 		}
 	}
-
+	// handles email check @ignore
 	handleCheckEmail() {
 		this.form.checkForField("email", (checkResult) => {
 			console.log(checkResult);
@@ -70,7 +73,7 @@ export class Login extends Component {
 	}
 
 	render() {
-		const { formError, formValue } = this.state;
+		const { formValue } = this.state;
 		return (
 			<div class="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen md:pt-10 pb-4 px-2 md:px-0 flex justify-center items-center">
 				<div class="md:w-72 w-full bg-white mx-auto p-6 pt-1 my-5 rounded-none shadow-2xl">
@@ -129,13 +132,13 @@ export class Login extends Component {
 							.
 						</small>
 						<small class="max-w-lg text-xs mx-auto flex justify-center text-black">
-							<a href="#" class="hover:underline">
+							<Link to="#" class="hover:underline">
 								Contact
-							</a>
+							</Link>
 							<span class="mx-3">•</span>
-							<a href="#" class="hover:underline">
+							<Link to="#" class="hover:underline">
 								Privacy
-							</a>
+							</Link>
 						</small>
 					</div>
 				</div>

@@ -6,7 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
+// TODO: complete redux connection.
 ReactDOM.render(
+	// store provided to application's top level component
 	<Provider store={store}>
 		<App />
 	</Provider>,

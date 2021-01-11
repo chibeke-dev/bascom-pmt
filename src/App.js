@@ -8,7 +8,6 @@ const History = createBrowserHistory();
 function App() {
 	return (
 		<Router>
-			{/* {state.isLoggedIn ? <Application /> : <Landing />} */}
 			<Routes />
 		</Router>
 	);

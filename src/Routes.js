@@ -12,7 +12,25 @@ import Settings from "./pages/dashboardPages/Settings";
 import Landing from "./pages/landingPages/Index";
 
 /**
- * just a test run not an actual route system
+ * #### Routes Component
+ * Shell containing all application routes.
+ * Shell should be added to App.js
+ * ##### Usage
+ * ```
+ * ...
+ * import Routes from "./Routes";
+ *
+ * function App() {
+ *	return (
+ *		<Router>
+ *			<Routes />
+ *		</Router>
+ * 	);
+ * }
+ *
+ * export default App;
+ *
+ * ```
  */
 
 export default class Routes extends Component {

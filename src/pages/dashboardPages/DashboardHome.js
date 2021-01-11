@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { HiSearch } from "react-icons/hi";
-import Accordion from "../../components/utilities/Accordion";
 import ProjectCup from "../../components/ProjectCup";
 import landing from "../../img/landing.svg";
 import Input from "../../components/utilities/Input";
 import { List, Panel, PanelGroup } from "rsuite";
-import PlaceholderParagraph from "rsuite/lib/Placeholder/PlaceholderParagraph";
 import AppContainer from "./AppContainer";
 
 class DashboardHome extends Component {
@@ -15,7 +13,7 @@ class DashboardHome extends Component {
 			search: false,
 		};
 	}
-
+	//TODO: Dynamic contents to populate  content
 	/**
 	 * this will be moved to redux
 	 */
@@ -26,6 +24,7 @@ class DashboardHome extends Component {
 		});
 	}
 	render() {
+		// some dummy data
 		const data = [
 			"Roses are red",
 			"Violets are blue",

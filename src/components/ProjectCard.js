@@ -5,7 +5,7 @@ import Badge, { BadgeGroup } from "../components/utilities/Badge";
 class ProjectCard extends Component {
 	render() {
 		const { children, name } = this.props;
-
+		// TODO: Add dynamic data with redux.
 		return (
 			<div className="bg-white rounded p-2 text-gray-500 font-medium space-y-2">
 				<div className="task_name text-gray-500 flex items-center justify-start space-x-1 text-lg font-semibold">

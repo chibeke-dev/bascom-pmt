@@ -4,6 +4,7 @@ export function BoardGroup({ children }) {
 	return <div className="flex space-x-10">{children}</div>;
 }
 
+// TODO: Test responsiveness
 export class Board extends Component {
 	render() {
 		const { children, header } = this.props;

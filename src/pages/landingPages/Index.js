@@ -12,6 +12,9 @@ import Home from "./views/Home";
 import "./App.css";
 import Login from "../auth/Login";
 
+// TODO: Fill content on landing page
+// TODO: Build Contact Us, Privacy, other related landng pages
+
 const history = createBrowserHistory();
 
 const Landing = () => {

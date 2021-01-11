@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import loginImg from "../../img/login.jpg";
 import logoMain from "../landingPages/assets/images/Logo.png";
 import Image from "../landingPages/components/elements/Image";
 
@@ -8,7 +7,6 @@ import {
 	FormGroup,
 	FormControl,
 	ControlLabel,
-	HelpBlock,
 	Schema,
 	ButtonToolbar,
 	Button,
@@ -16,6 +14,8 @@ import {
 import { Link, Redirect } from "react-router-dom";
 
 const { StringType } = Schema.Types;
+
+// schema for validation provided by rsuites
 
 const model = Schema.Model({
 	name: StringType().isRequired("This field is required."),
@@ -34,6 +34,7 @@ const model = Schema.Model({
 		.isRequired("This field is required."),
 });
 
+// Input field component to be used in Signup component
 class TextField extends React.PureComponent {
 	render() {
 		const { name, label, accepter, ...props } = this.props;
@@ -46,7 +47,8 @@ class TextField extends React.PureComponent {
 	}
 }
 
-export class Login extends Component {
+// main Signup component
+export class Signup extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -78,7 +80,7 @@ export class Login extends Component {
 	}
 
 	render() {
-		const { formError, formValue } = this.state;
+		const { formValue } = this.state;
 		return (
 			<div class="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen md:pt-10 pb-4 px-2 md:px-0 flex justify-center items-center">
 				<div class="md:w-72 w-full bg-white mx-auto p-6 pt-1 my-5 rounded-none shadow-2xl">
@@ -150,13 +152,13 @@ export class Login extends Component {
 							.
 						</small>
 						<small class="max-w-lg text-xs mx-auto flex justify-center text-black">
-							<a href="#" class="hover:underline">
+							<Link href="#" class="hover:underline">
 								Contact
-							</a>
+							</Link>
 							<span class="mx-3">•</span>
-							<a href="#" class="hover:underline">
+							<Link href="#" class="hover:underline">
 								Privacy
-							</a>
+							</Link>
 						</small>
 					</div>
 				</div>
@@ -165,4 +167,4 @@ export class Login extends Component {
 	}
 }
 
-export default Login;
+export default Signup;
