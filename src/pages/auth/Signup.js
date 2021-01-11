@@ -18,10 +18,20 @@ import { Link, Redirect } from "react-router-dom";
 const { StringType } = Schema.Types;
 
 const model = Schema.Model({
+	name: StringType().isRequired("This field is required."),
 	email: StringType()
 		.isEmail("Please enter a valid email address.")
 		.isRequired("This field is required."),
 	password: StringType().isRequired("This field is required."),
+	cpassword: StringType()
+		.addRule((value, data) => {
+			if (value !== data.password) {
+				return false;
+			}
+
+			return true;
+		}, "The two passwords do not match")
+		.isRequired("This field is required."),
 });
 
 class TextField extends React.PureComponent {
@@ -41,6 +51,7 @@ export class Login extends Component {
 		super(props);
 		this.state = {
 			formValue: {
+				name: "",
 				email: "",
 				password: "",
 			},
@@ -52,14 +63,11 @@ export class Login extends Component {
 
 	handleSubmit() {
 		const { formValue } = this.state;
-		if (!this.form.check()) {
-			console.error("Form Error");
-			return;
-		}
-		if (!this.form.check()) {
-			console.log("invalid user");
+		if (this.form.check()) {
+			console.log("Form data", formValue);
+			return this.props.history.push("/");
 		} else {
-			return <Redirect to="/" />;
+			return console.error("error");
 		}
 	}
 
@@ -99,6 +107,12 @@ export class Login extends Component {
 							<TextField
 								className="rounded-0 w-full"
 								block
+								name="name"
+								label="Name"
+							/>
+							<TextField
+								className="rounded-0 w-full"
+								block
 								name="email"
 								label="Email"
 							/>
@@ -107,6 +121,13 @@ export class Login extends Component {
 								name="password"
 								block
 								label="Password"
+								type="password"
+							/>
+							<TextField
+								className="rounded-0"
+								name="cpassword"
+								block
+								label="Confirm Password"
 								type="password"
 							/>
 							<ButtonToolbar>
@@ -122,9 +143,9 @@ export class Login extends Component {
 							</ButtonToolbar>
 						</Form>
 						<small class="text-gray-800 text-xs text-justify">
-							Don't have an account?{" "}
-							<Link to="/sign-up" class="font-bold hover:underline">
-								Sign up
+							Already have an account?{" "}
+							<Link to="/login" className="font-bold hover:underline">
+								Login
 							</Link>
 							.
 						</small>

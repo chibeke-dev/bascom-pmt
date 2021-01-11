@@ -1,1 +1,1 @@
-export * from "./userConst";
+export * from "./authTypes";

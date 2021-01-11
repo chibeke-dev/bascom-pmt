@@ -6,6 +6,12 @@
   transition: all 0.3s linear;
   
 } */
+.h-29 {
+	height: 28rem;
+}
+.badge_group .badge:first-of-type {
+	@apply ml-0;
+}
 .transition-close {
 	height: 0;
 	display: none;
@@ -37,7 +43,17 @@ div.rs-drawer-right.rs-drawer-lg {
 	.rs-drawer-right.rs-drawer-lg {
 		width: 968px !important;
 	}
+	input.rs-input {
+		@apply w-60 !important;
+	}
 }
 input.rs-input {
-	@apply w-56;
+	@apply w-full !important;
+}
+
+.rounded-0 {
+	@apply rounded-none !important;
+}
+ul {
+	list-style: none !important;
 }

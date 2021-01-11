@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useLocation, Switch, Route, Router } from "react-router-dom";
+import { useLocation, Switch, Route, Router, Redirect } from "react-router-dom";
 import AppRoute from "./utils/AppRoute";
 import ScrollReveal from "./utils/ScrollReveal";
 import { createBrowserHistory } from "history";
@@ -31,7 +31,13 @@ const Landing = () => {
 				ref={childRef}
 				children={() => (
 					<Switch>
-						<AppRoute exact path="/" component={Home} layout={LayoutDefault} />
+						<AppRoute
+							exact
+							path="/home"
+							component={Home}
+							layout={LayoutDefault}
+						/>
+						<Redirect from="/" to="/home" />
 						<Route path="/login" exact component={Login} />
 					</Switch>
 				)}

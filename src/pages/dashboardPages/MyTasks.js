@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Button, Drawer, Icon, List, Panel, PanelGroup } from "rsuite";
+import { Button, Drawer, List, Panel, PanelGroup } from "rsuite";
 import PlaceholderParagraph from "rsuite/lib/Placeholder/PlaceholderParagraph";
 import Menubar from "../../components/Menubar";
+import AppContainer from "./AppContainer";
 // import DrawerComp from "./DrawerComp";
 
 class MyTasks extends Component {
@@ -33,9 +34,9 @@ class MyTasks extends Component {
 			"And so are you",
 		];
 		return (
-			<div className="bg-gray-100 overflow-y-auto h-screen w-full">
+			<div className="w-full">
 				<Menubar name="My Task" />
-				<main className="container lg:px-32 md:px-16 px-3">
+				<AppContainer>
 					<div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 						<Panel className="border-0 border-b-0 bg-white h-80screen">
 							{" "}
@@ -127,7 +128,7 @@ class MyTasks extends Component {
 							</Drawer>
 						</div>
 					</div>
-				</main>
+				</AppContainer>
 			</div>
 		);
 	}
