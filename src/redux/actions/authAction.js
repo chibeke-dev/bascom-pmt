@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import {
 	REGISTER_REQUEST,
 	REGISTER_SUCCESS,
@@ -12,77 +10,79 @@ import {
 	LOGOUT_REQUEST,
 } from "../actionTypes/";
 
+import AuthService from "../../services/AuthService";
+import { setMessage } from "./messageAction";
+
 // SIGN UP actions
-const signUpRequest = () => {
+const registerRequest = () => {
 	return {
 		type: REGISTER_REQUEST,
 	};
 };
-const signUpSuccess = (user) => {
+const registerSuccess = (user) => {
 	return {
 		type: REGISTER_SUCCESS,
+	};
+};
+const registerFailure = (error) => {
+	return {
+		type: REGISTER_FAILURE,
+	};
+};
+
+export const register = ({ firstName, lastName, email, password }, history) => (
+	dispatch
+) => {
+	dispatch(registerRequest());
+	return AuthService.register(firstName, lastName, email, password)
+		.then((res) => {
+			dispatch(registerSuccess());
+			dispatch(setMessage(res));
+		})
+		.catch((err) => {
+			dispatch(registerFailure());
+			dispatch(setMessage(res));
+		});
+};
+
+const loginRequest = () => {
+	return {
+		type: LOGIN_REQUEST,
+	};
+};
+
+const loginSuccess = (user) => {
+	return {
+		type: LOGIN_SUCCESS,
 		payload: {
 			user,
 		},
 	};
 };
-const signUpFailure = (error) => {
-	return {
-		type: REGISTER_FAILURE,
-		payload: {
-			error,
-		},
-	};
-};
 
-export const signUp = (user, history) => {
-	return function(dispatch) {
-		dispatch(signUpRequest());
-		axios({
-			method: "post",
-			url: "",
-			data: user,
-		})
-			.then((response) => {
-				const { data } = response.data;
-				dispatch(signUpSuccess(data));
-				history.push("/");
-			})
-			.catch((error) => {
-				console.log(error);
-				dispatch(signUpFailure(error));
-			});
-	};
-};
-
-const signInRequest = () => {
-	return {
-		type: LOGIN_REQUEST,
-	};
-};
-const signInSuccess = (token) => {
-	return {
-		type: LOGIN_SUCCESS,
-		payload: {
-			token,
-		},
-	};
-};
-const signInFailure = (error) => {
+const loginFailure = () => {
 	return {
 		type: LOGIN_FAILURE,
-		payload: error,
 	};
 };
 
-export const signIn = (payload, history)=>{
-  return function(dispatch){
-    dispatch(signInRequest)
-    axios({
-      method:'get',
-      url:'',
-      data:payload,
-      headers:
-    })
-  }
-}
+export const login = ({ email, password }, history) => (dispatch) => {
+	dispatch(loginRequest());
+	return AuthService.login(email, password)
+		.then((res) => {
+			dispatch(loginSuccess(res.user));
+			dispatch(setMessage(res));
+		})
+		.catch((err) => {
+			dispatch(loginFailure());
+			dispatch(setMessage(err));
+		});
+};
+
+export const logOut = () => (dispatch) => {
+	dispatch({ type: LOGOUT_REQUEST });
+	AuthService.logout();
+	dispatch({
+		type: LOGOUT_SUCCESS,
+	});
+};
