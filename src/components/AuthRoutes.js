@@ -11,8 +11,9 @@ import { Redirect, Route } from "react-router-dom";
  * 		...
  * 		<AuthRoute path='/dashboard' component={Component} isAutheticated='true'
  * ```
- * @param {*} param0
  */
+
+//  TODO: Attach redirect message and location to `fromRedirectRef` in login.js
 const AuthRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 	<Route
 		{...rest}
