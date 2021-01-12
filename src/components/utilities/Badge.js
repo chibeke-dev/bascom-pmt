@@ -1,9 +1,13 @@
 import React from "react";
 
-function Badge({ children, color, rounded, width }) {
+export function BadgeGroup({ children }) {
+	return <div className="badge_group flex flex-wrap">{children}</div>;
+}
+
+function Badge({ children, color, rounded, width, className }) {
 	return (
 		<span
-			className={`inline-block bg-${color}-300 rounded-${rounded} px-3 py-1 text-sm font-semibold w-${width} text-center text-white-700 mr-2`}
+			className={`badge inline-block bg-${color}-400 text-white rounded-${rounded} py-0.5 px-2 m-1  text-xs font-semibold text-center text-white-700 ${className}`}
 		>
 			{children}
 		</span>

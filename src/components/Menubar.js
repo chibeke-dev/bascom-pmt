@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { HiSearch } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export class Menubar extends Component {
 	render() {
@@ -15,17 +16,18 @@ export class Menubar extends Component {
 										{/* <br /> */}
 									</h1>
 									<div>
-										<a className="text-gray-500 text-center hover:text-blue-400 active transition duration-300 pt-1 cursor-pointer hover:border-blue-400 border-b-4 border-transparent mr-3 text-md font-medium">
+										{/* TODO: Add dynamic links */}
+										<Link className="text-gray-500 text-center hover:text-blue-400 active transition duration-300 pt-1 cursor-pointer hover:border-blue-400 border-b-4 border-transparent mr-3 text-md font-medium">
 											List
-										</a>
+										</Link>
 
-										<a className="text-gray-500 hover:text-blue-400 mr-3 transition duration-300 cursor-pointer hover:border-blue-400 border-b-4 border-transparent text-md font-medium">
+										<Link className="text-gray-500 hover:text-blue-400 mr-3 transition duration-300 cursor-pointer hover:border-blue-400 border-b-4 border-transparent text-md font-medium">
 											Calender
-										</a>
+										</Link>
 
-										<a className="text-gray-500 hover:text-blue-400 mr-3 transition duration-300 cursor-pointer hover:border-blue-400 border-b-4 border-transparent text-md font-medium">
+										<Link className="text-gray-500 hover:text-blue-400 mr-3 transition duration-300 cursor-pointer hover:border-blue-400 border-b-4 border-transparent text-md font-medium">
 											Files
-										</a>
+										</Link>
 									</div>
 								</div>
 								<div className="hidden md:block">

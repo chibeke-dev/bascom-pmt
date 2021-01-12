@@ -1,15 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import "rsuite/dist/styles/rsuite-default.css";
-import Application from "./pages/dashboardPages/Index";
-import Login from "./pages/auth/Login";
-import Landing from "./pages/landingPages/Index";
+import { createBrowserHistory } from "history";
+import Routes from "./Routes";
 
-const state = {
-	isLoggedIn: false,
-};
+const History = createBrowserHistory();
 function App() {
-	return <Router>{state.isLoggedIn ? <Application /> : <Landing />}</Router>;
+	return (
+		<Router>
+			<Routes />
+		</Router>
+	);
 }
 
 export default App;

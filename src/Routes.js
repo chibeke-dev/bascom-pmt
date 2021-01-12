@@ -1,18 +1,59 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "./landingPages";
-import DashboardHome from "./dashboardPages";
+import AuthRoute from "./components/AuthRoutes";
+import Components from "./components/Components";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
+import DashboardHome from "./pages/dashboardPages/Index";
+import MyTasks from "./pages/dashboardPages/MyTasks";
+import Notifications from "./pages/dashboardPages/Notifications";
+import Projects from "./pages/dashboardPages/Projects";
+import Settings from "./pages/dashboardPages/Settings";
+import Landing from "./pages/landingPages/Index";
 
 /**
- * just a test run not an actual route system
+ * #### Routes Component
+ * Shell containing all application routes.
+ * Shell should be added to App.js
+ * ##### Usage
+ * ```
+ * ...
+ * import Routes from "./Routes";
+ *
+ * function App() {
+ *	return (
+ *		<Router>
+ *			<Routes />
+ *		</Router>
+ * 	);
+ * }
+ *
+ * export default App;
+ *
+ * ```
  */
+
 export default class Routes extends Component {
-  render() {
-    return (
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/i/" component={DashboardHome} />
-      </Switch>
-    );
-  }
+	authStats = true;
+	render() {
+		return (
+			<Switch>
+				<AuthRoute
+					path="/"
+					exact
+					component={DashboardHome}
+					isAuthenticated={this.authStats}
+				/>
+				<AuthRoute path="/i/my-task" component={MyTasks} />
+				<AuthRoute path="/projects" exact component={Projects} />
+				<AuthRoute path="/settings" component={Settings} />
+				<AuthRoute path="/i/notifications" component={Notifications} />
+
+				<Route path="/login" component={Login} />
+				<Route path="/Sign-up" component={Signup} />
+				<Route path="/home" exact component={Landing} />
+				<AuthRoute path="/private/components" exact component={Components} />
+			</Switch>
+		);
+	}
 }

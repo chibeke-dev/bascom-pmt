@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Image from "../../elements/Image";
-import logoMain from "./../../../assets/images/logo.svg";
+import logoMain from "./../../../assets/images/Logo.png";
 
 const Logo = ({ className, ...props }) => {
 	const classes = classNames("brand", className);
