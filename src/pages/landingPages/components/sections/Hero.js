@@ -86,7 +86,7 @@ const Hero = ({
 										color="dark"
 										className="noHover"
 										wideMobile
-										href="/login"
+										href="/Login"
 									>
 										Login
 									</Button>

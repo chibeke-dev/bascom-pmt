@@ -126,7 +126,7 @@ export class Login extends Component {
 							formValue={formValue}
 							model={model}
 						>
-							<TextField className="w-56" name="email" label="Email" />
+							<TextField className="w-70" name="email" label="Email" />
 							<TextField name="password" label="Password" type="password" />
 							<ButtonToolbar>
 								<Button appearance="primary" block onClick={this.handleSubmit}>
