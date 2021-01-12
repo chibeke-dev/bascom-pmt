@@ -34,7 +34,7 @@ import Landing from "./pages/landingPages/Index";
  */
 
 export default class Routes extends Component {
-	authStats = false;
+	authStats = true;
 	render() {
 		return (
 			<Switch>

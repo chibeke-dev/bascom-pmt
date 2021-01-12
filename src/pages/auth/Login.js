@@ -12,7 +12,7 @@ import {
 	Button,
 } from "rsuite";
 import { Link, Redirect } from "react-router-dom";
-
+import { Login as LoginAuth } from "../../redux/actions";
 const { StringType } = Schema.Types;
 
 // schema for validation provided by rsuites
@@ -52,12 +52,10 @@ export class Login extends Component {
 	}
 
 	// handles form submition
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault();
 		const { formValue } = this.state;
-		if (!this.form.check()) {
-			console.error("Form Error");
-			return;
-		}
+
 		//TODO: adjust `!this.fom.check()` to return a radable message by users
 		if (!this.form.check()) {
 			console.log("invalid user");
@@ -75,18 +73,18 @@ export class Login extends Component {
 	render() {
 		const { formValue } = this.state;
 		return (
-			<div class="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen md:pt-10 pb-4 px-2 md:px-0 flex justify-center items-center">
+			<div className="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen md:pt-10 pb-4 px-2 md:px-0 flex justify-center items-center">
 				<div class="md:w-72 w-full bg-white mx-auto p-6 pt-1 my-5 rounded-none shadow-2xl">
 					<section>
 						<div className="flex justify-center items-center flex-col space-y-1 mt-6">
 							<Link to="/">
 								<Image src={logoMain} alt="Open" width={50} height={50} />
 							</Link>{" "}
-							<p class="text-gray-600">Sign in to your account.</p>
+							<p className="text-gray-600">Sign in to your account.</p>
 						</div>
 					</section>
 
-					<div class="mt-10">
+					<div className="mt-10">
 						<Form
 							fluid
 							ref={(ref) => (this.form = ref)}
@@ -101,14 +99,12 @@ export class Login extends Component {
 						>
 							<TextField
 								className="rounded-0 w-full"
-								block
 								name="email"
 								label="Email"
 							/>
 							<TextField
 								className="rounded-0"
 								name="password"
-								block
 								label="Password"
 								type="password"
 							/>
@@ -124,19 +120,19 @@ export class Login extends Component {
 								{/* <Button onClick={this.handleCheckEmail}>Check Email</Button> */}
 							</ButtonToolbar>
 						</Form>
-						<small class="text-gray-800 text-xs text-justify">
+						<small className="text-gray-800 text-xs text-justify">
 							Don't have an account?{" "}
 							<Link to="/sign-up" class="font-bold hover:underline">
 								Sign up
 							</Link>
 							.
 						</small>
-						<small class="max-w-lg text-xs mx-auto flex justify-center text-black">
+						<small className="max-w-lg text-xs mx-auto flex justify-center text-black">
 							<Link to="#" class="hover:underline">
 								Contact
 							</Link>
-							<span class="mx-3">•</span>
-							<Link to="#" class="hover:underline">
+							<span className="mx-3">•</span>
+							<Link to="#" className="hover:underline">
 								Privacy
 							</Link>
 						</small>

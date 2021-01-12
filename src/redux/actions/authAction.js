@@ -41,7 +41,7 @@ export const register = ({ firstName, lastName, email, password }, history) => (
 		})
 		.catch((err) => {
 			dispatch(registerFailure());
-			dispatch(setMessage(res));
+			dispatch(setMessage(err));
 		});
 };
 
@@ -66,7 +66,7 @@ const loginFailure = () => {
 	};
 };
 
-export const login = ({ email, password }, history) => (dispatch) => {
+export const login = ({ email, password }) => (dispatch) => {
 	dispatch(loginRequest());
 	return AuthService.login(email, password)
 		.then((res) => {

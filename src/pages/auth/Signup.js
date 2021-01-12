@@ -12,7 +12,8 @@ import {
 	Button,
 } from "rsuite";
 import { Link, Redirect } from "react-router-dom";
-
+import { connect } from "react-redux";
+import { register } from "../../redux/actions";
 const { StringType } = Schema.Types;
 
 // schema for validation provided by rsuites
@@ -30,7 +31,7 @@ const model = Schema.Model({
 			}
 
 			return true;
-		}, "The two passwords do not match")
+		}, "Password mismatch")
 		.isRequired("This field is required."),
 });
 
@@ -57,26 +58,64 @@ export class Signup extends Component {
 				email: "",
 				password: "",
 			},
-			formError: {},
+			loading: false,
+			sussessful: false,
+			formFinal: {
+				firstName: "",
+				lastName: "",
+				email: "",
+				password: "",
+			},
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleCheckEmail = this.handleCheckEmail.bind(this);
+		this.handleName = this.handleName.bind(this);
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault();
+		this.setState({
+			...this.state,
+			sussessful: false,
+			loading: true,
+		});
 		const { formValue } = this.state;
 		if (this.form.check()) {
-			console.log("Form data", formValue);
-			return this.props.history.push("/");
-		} else {
-			return console.error("error");
+			this.handleName();
+			this.props.dispatch(
+				register(formValue)
+					.then(() =>
+						this.setState({
+							...this.state,
+							successful: true,
+						})
+					)
+					.catch(() => {
+						this.setState({
+							...this.setState({
+								...this.state,
+								successful: false,
+							}),
+						});
+					})
+			);
 		}
 	}
 
-	handleCheckEmail() {
-		this.form.checkForField("email", (checkResult) => {
-			console.log(checkResult);
-		});
+	handleName() {
+		const { formValue } = this.state;
+		const { name, email, password } = formValue;
+		if (name !== undefined && name !== null) {
+			name.split(" ");
+			this.setState({
+				...this.state,
+				formFinal: {
+					firstName: name[0],
+					lastName: name[1],
+					email: email,
+					password: password,
+				},
+			});
+		}
 	}
 
 	render() {
@@ -111,17 +150,20 @@ export class Signup extends Component {
 								block
 								name="name"
 								label="Name"
+								placeholder="Enter full name"
 							/>
 							<TextField
 								className="rounded-0 w-full"
 								block
 								name="email"
+								placeholder="Enter email address"
 								label="Email"
 							/>
 							<TextField
 								className="rounded-0"
 								name="password"
 								block
+								placeholder="Enter passwod"
 								label="Password"
 								type="password"
 							/>
@@ -130,6 +172,7 @@ export class Signup extends Component {
 								name="cpassword"
 								block
 								label="Confirm Password"
+								placeholder="Enter password again"
 								type="password"
 							/>
 							<ButtonToolbar>
@@ -137,6 +180,7 @@ export class Signup extends Component {
 									className="rounded-0"
 									appearance="primary"
 									block
+									loading={this.state.loading}
 									onClick={this.handleSubmit}
 								>
 									Login
