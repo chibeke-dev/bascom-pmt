@@ -1,67 +1,64 @@
 import {
-	REGISTER_REQUEST,
+	USER_LOADED,
+	USER_LOADING,
+	AUTH_ERROR,
 	REGISTER_SUCCESS,
-	REGISTER_FAILURE,
-	LOGIN_REQUEST,
+	REGISTER_FAIL,
 	LOGIN_SUCCESS,
-	LOGIN_FAILURE,
+	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
-	LOGOUT_REQUEST,
 } from "../actionTypes";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-const initialState = user
-	? { isAuthenticated: true, user, loading: false }
-	: { isAuthenticated: false, user: null, loading: false };
+const initialState = {
+	token: localStorage.getItem("token"),
+	redirectTo: null,
+	isAuthenticated: true,
+	loading: false,
+	user: null,
+};
 
 export default function authReducer(state = initialState, action) {
-	const { type, payload } = action;
+	const { type, payload, redirectTo } = action;
 
 	switch (type) {
-		case REGISTER_REQUEST:
+		case USER_LOADING:
 			return {
 				...state,
 				loading: true,
 			};
-		case REGISTER_SUCCESS:
+		case USER_LOADED:
 			return {
 				...state,
-				isLoggedIn: false,
-			};
-		case REGISTER_FAILURE:
-			return {
-				...state,
-				isLoggedIn: false,
-			};
-		case LOGIN_REQUEST:
-			return {
-				...state,
-				loading: true,
+				isAuthenticated: true,
+				loading: false,
+				redirectTo: redirectTo,
+				user: payload,
 			};
 		case LOGIN_SUCCESS:
+			localStorage.setItem("token", payload.token);
 			return {
 				...state,
-				isLoggedIn: true,
-				user: payload.user,
+				...payload,
+				isAuthenticated: true,
+				loading: false,
 			};
-		case LOGIN_FAILURE:
-			return {
-				...state,
-				isLoggedIn: false,
-				user: null,
-			};
-		case LOGOUT_REQUEST:
-			return {
-				...state,
-				loading: true,
-			};
+		case REGISTER_SUCCESS:
+			return { ...state, loading: false };
+		case AUTH_ERROR:
+		case LOGIN_FAIL:
+		case REGISTER_FAIL:
 		case LOGOUT_SUCCESS:
+			localStorage.removeItem("token");
 			return {
 				...state,
-				isLoggedIn: false,
+				token: null,
 				user: null,
+				isAuthenticated: null,
+				loading: false,
 			};
+
 		default:
 			return state;
 	}

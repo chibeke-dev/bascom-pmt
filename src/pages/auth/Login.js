@@ -10,9 +10,11 @@ import {
 	Schema,
 	ButtonToolbar,
 	Button,
+	Alert,
 } from "rsuite";
-import { Link, Redirect } from "react-router-dom";
-import { Login as LoginAuth } from "../../redux/actions";
+import { Link, Redirect, Router } from "react-router-dom";
+import { login, fakeLogin } from "../../redux/actions";
+import { connect } from "react-redux";
 const { StringType } = Schema.Types;
 
 // schema for validation provided by rsuites
@@ -46,21 +48,43 @@ export class Login extends Component {
 				password: "",
 			},
 			formError: {},
+			loading: false,
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleCheckEmail = this.handleCheckEmail.bind(this);
 	}
 
 	// handles form submition
+	//TODO: adjust `!this.fom.check()` to return a radable message by users
 	handleSubmit(e) {
 		e.preventDefault();
 		const { formValue } = this.state;
 
-		//TODO: adjust `!this.fom.check()` to return a radable message by users
-		if (!this.form.check()) {
-			console.log("invalid user");
-		} else {
-			return <Redirect to="/" />;
+		if (this.form.check()) {
+			this.setState({
+				...this.state,
+				loading: true,
+			});
+			setTimeout(() => {
+				if (
+					!formValue.email !== "admin@gmail.com" &&
+					formValue.password !== "admin1234"
+				) {
+					this.setState({
+						...this.state,
+						loading: false,
+					});
+					Alert.error("Email or password incorrect", 5000);
+				} else {
+					Alert.success("Login Success", 5000);
+					this.props.history.push("/dashboard");
+				}
+			}, 5000);
+			// if (this.props.fakeLogin(formValue.email, formValue.password)) {
+			// 	if (this.props.redirectTo) {
+			// 		<Redirect to={"/" + this.props.redirectTo} />;
+			// 	}
+			// }
 		}
 	}
 	// handles email check @ignore
@@ -101,18 +125,21 @@ export class Login extends Component {
 								className="rounded-0 w-full"
 								name="email"
 								label="Email"
+								size="lg"
 							/>
 							<TextField
 								className="rounded-0"
 								name="password"
 								label="Password"
 								type="password"
+								size="lg"
 							/>
 							<ButtonToolbar>
 								<Button
 									className="rounded-0"
 									appearance="primary"
 									block
+									loading={this.state.loading}
 									onClick={this.handleSubmit}
 								>
 									Login
@@ -143,4 +170,15 @@ export class Login extends Component {
 	}
 }
 
-export default Login;
+function mapStateToProps(state) {
+	const { user, loading, redirectTo } = state.auth;
+	const { message, status } = state.error;
+	return {
+		user,
+		loading,
+		message,
+		status,
+		redirectTo,
+	};
+}
+export default connect(mapStateToProps, { login, fakeLogin })(Login);

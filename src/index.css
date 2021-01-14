@@ -48,6 +48,7 @@ body {
 .h-29 {
 	height: 28rem;
 }
+
 .badge_group .badge:first-of-type {
 	@apply ml-0;
 }
@@ -78,6 +79,11 @@ body {
 div.rs-drawer-right.rs-drawer-lg {
 	width: 100%;
 }
+.rs-alert-item-content {
+	min-width: 250px;
+	width: 100%;
+}
+
 @media (min-width: 768px) {
 	.rs-drawer-right.rs-drawer-lg {
 		width: 968px !important;

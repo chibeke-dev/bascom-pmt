@@ -19,8 +19,8 @@ class Components extends Component {
 					<div className="">
 						<div className="mx-5 my-3">
 							<BoardGroup>
-								<Board header="Todo List">
-									<ProjectCard>some thing</ProjectCard>
+								<Board header="Tod List">
+									<ProjectCard />
 								</Board>
 								<Board header="Todo List">
 									<ProjectCard>some thing</ProjectCard>

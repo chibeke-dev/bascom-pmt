@@ -3,6 +3,7 @@ import logoMain from "../landingPages/assets/images/Logo.png";
 import Image from "../landingPages/components/elements/Image";
 
 import {
+	Alert,
 	Form,
 	FormGroup,
 	FormControl,
@@ -48,6 +49,8 @@ class TextField extends React.PureComponent {
 	}
 }
 
+const alertMsg = (msg) => Alert.error(msg, 5000);
+
 // main Signup component
 export class Signup extends Component {
 	constructor(props) {
@@ -58,8 +61,6 @@ export class Signup extends Component {
 				email: "",
 				password: "",
 			},
-			loading: false,
-			sussessful: false,
 			formFinal: {
 				firstName: "",
 				lastName: "",
@@ -73,40 +74,29 @@ export class Signup extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.setState({
-			...this.state,
-			sussessful: false,
-			loading: true,
-		});
-		const { formValue } = this.state;
+		// const { register, message, status } = this.props;
+		const { formValue, formFinal } = this.state;
+		const { name, email, password } = formValue;
+		const { first } = formFinal;
 		if (this.form.check()) {
-			this.handleName();
-			this.props.dispatch(
-				register(formValue)
-					.then(() =>
-						this.setState({
-							...this.state,
-							successful: true,
-						})
-					)
-					.catch(() => {
-						this.setState({
-							...this.setState({
-								...this.state,
-								successful: false,
-							}),
-						});
-					})
-			);
+			let newName = name.split(" ");
+			this.setState({
+				formFinal: {
+					firstName: newName[0],
+					lastName: newName[1],
+					email: email,
+					password: password,
+				},
+			});
+			this.props.register(newName[0], newName[1], email, password);
 		}
 	}
 
-	handleName() {
-		const { formValue } = this.state;
+	handleName(formValue) {
 		const { name, email, password } = formValue;
 		if (name !== undefined && name !== null) {
 			name.split(" ");
-			this.setState({
+			return this.setState({
 				...this.state,
 				formFinal: {
 					firstName: name[0],
@@ -122,7 +112,7 @@ export class Signup extends Component {
 		const { formValue } = this.state;
 		return (
 			<div class="bg-gradient-to-r from-blue-400 to-blue-500 min-h-screen md:pt-10 pb-4 px-2 md:px-0 flex justify-center items-center">
-				<div class="md:w-72 w-full bg-white mx-auto p-6 pt-1 my-5 rounded-none shadow-2xl">
+				<div class="md:w-96 w-full bg-white mx-auto p-6 pt-1 my-5 rounded-none shadow-2xl">
 					<section>
 						<div className="flex justify-center items-center flex-col space-y-1 mt-6">
 							<Link to="/">
@@ -147,32 +137,32 @@ export class Signup extends Component {
 						>
 							<TextField
 								className="rounded-0 w-full"
-								block
 								name="name"
-								label="Name"
+								size="lg"
+								label="Full Name"
 								placeholder="Enter full name"
 							/>
 							<TextField
 								className="rounded-0 w-full"
-								block
 								name="email"
 								placeholder="Enter email address"
+								size="lg"
 								label="Email"
 							/>
 							<TextField
 								className="rounded-0"
 								name="password"
-								block
 								placeholder="Enter passwod"
+								size="lg"
 								label="Password"
 								type="password"
 							/>
 							<TextField
 								className="rounded-0"
 								name="cpassword"
-								block
 								label="Confirm Password"
 								placeholder="Enter password again"
+								size="lg"
 								type="password"
 							/>
 							<ButtonToolbar>
@@ -180,10 +170,10 @@ export class Signup extends Component {
 									className="rounded-0"
 									appearance="primary"
 									block
-									loading={this.state.loading}
+									loading={this.props.loading}
 									onClick={this.handleSubmit}
 								>
-									Login
+									Signup
 								</Button>
 								{/* <Button onClick={this.handleCheckEmail}>Check Email</Button> */}
 							</ButtonToolbar>
@@ -211,4 +201,14 @@ export class Signup extends Component {
 	}
 }
 
-export default Signup;
+function mapStateToProps(state) {
+	const { user, loading } = state.auth;
+	const { message, status } = state.error;
+	return {
+		user,
+		loading,
+		message,
+		status,
+	};
+}
+export default connect(mapStateToProps, { register })(Signup);
