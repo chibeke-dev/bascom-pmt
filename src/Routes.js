@@ -10,7 +10,9 @@ import Notifications from "./pages/dashboardPages/Notifications";
 import Projects from "./pages/dashboardPages/Projects";
 import Settings from "./pages/dashboardPages/Settings";
 import Landing from "./pages/landingPages/Index";
-
+import ContactUs from "./pages/landingPages/ContactUs";
+import Pricing from "./pages/landingPages/Pricing";
+import Project from "./pages/dashboardPages/Project/Project";
 /**
  * #### Routes Component
  * Shell containing all application routes.
@@ -46,12 +48,15 @@ export default class Routes extends Component {
 				/>
 				<AuthRoute path="/i/my-task" component={MyTasks} />
 				<AuthRoute path="/projects" exact component={Projects} />
+				<Route path="/project" component={Project} />
 				<AuthRoute path="/settings" component={Settings} />
 				<AuthRoute path="/i/notifications" component={Notifications} />
 
 				<Route path="/login" component={Login} />
 				<Route path="/Sign-up" component={Signup} />
 				<Route path="/home" exact component={Landing} />
+				<Route path="/ContactUs" component={ContactUs} />
+				<Route path="/Pricing" component={Pricing} />
 				<AuthRoute path="/private/components" exact component={Components} />
 			</Switch>
 		);

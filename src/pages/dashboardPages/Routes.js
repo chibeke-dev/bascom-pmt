@@ -6,7 +6,6 @@ import Notifications from "./Notifications";
 import Settings from "./Settings";
 import Components from "../../components/Components";
 import Projects from "./Projects";
-
 export default class Routes extends Component {
 	render() {
 		return (

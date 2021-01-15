@@ -114,7 +114,7 @@ const Header = ({
 										<li>
 											<Link
 												className="navlink_hover"
-												to="#0"
+												to="/About"
 												onClick={closeMenu}
 											>
 												Why Bascom Projects
@@ -123,7 +123,7 @@ const Header = ({
 										<li>
 											<Link
 												className="navlink_hover"
-												to="#0"
+												to="/Pricing"
 												onClick={closeMenu}
 											>
 												Pricing
@@ -132,7 +132,7 @@ const Header = ({
 										<li>
 											<Link
 												className="navlink_hover"
-												to="#0"
+												to="/ContactUs"
 												onClick={closeMenu}
 											>
 												Contact Us
@@ -143,7 +143,7 @@ const Header = ({
 										<ul className="list-reset header-nav-right">
 											<li>
 												<Link
-													to="#0"
+													to="/Sign-up"
 													className="button button-primary button-wide-mobile button-sm"
 													onClick={closeMenu}
 												>

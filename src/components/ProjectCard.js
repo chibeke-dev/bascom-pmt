@@ -17,10 +17,10 @@ class ProjectCard extends Component {
 					<Badge color="blue" rounded="full">
 						overdue
 					</Badge>
-					<Badge color="green" rounded="full">
+					<Badge color="yellow" rounded="full">
 						overdue
 					</Badge>
-					<Badge color="yellow" rounded="full">
+					<Badge color="red" rounded="full">
 						overdue
 					</Badge>
 				</BadgeGroup>

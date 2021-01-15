@@ -3,99 +3,99 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-Thin.ttf);
-	font-weight: 300;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Thin.ttf);
+  font-weight: 300;
 }
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-Light.ttf);
-	font-weight: 400;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Light.ttf);
+  font-weight: 400;
 }
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-Regular.ttf);
-	font-weight: 500;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Regular.ttf);
+  font-weight: 500;
 }
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-Medium.ttf);
-	font-weight: 600;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Medium.ttf);
+  font-weight: 600;
 }
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-SemiBold.ttf);
-	font-weight: 700;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-SemiBold.ttf);
+  font-weight: 700;
 }
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-Bold.ttf);
-	font-weight: 800;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-Bold.ttf);
+  font-weight: 800;
 }
 @font-face {
-	font-family: "Poppins";
-	src: url(./assets/fonts/Poppins-ExtraBold.ttf);
-	font-weight: 900;
+  font-family: "Poppins";
+  src: url(./assets/fonts/Poppins-ExtraBold.ttf);
+  font-weight: 900;
 }
 
 body {
-	font-family: Poppins, sans-serif !important;
+  font-family: Poppins, sans-serif !important;
 }
 /* .transition-open {
   transition: all 0.3s linear;
   
 } */
 .h-29 {
-	height: 28rem;
+  height: 28rem;
 }
 .badge_group .badge:first-of-type {
-	@apply ml-0;
+  @apply ml-0;
 }
 .transition-close {
-	height: 0;
-	display: none;
-	transition: all 9s linear;
+  height: 0;
+  display: none;
+  transition: all 9s linear;
 }
 .transition-call {
 }
 .active {
-	@apply border-blue-400 text-blue-400;
+  @apply border-blue-400 text-blue-400;
 }
 
 .d-none {
-	display: none;
+  display: none;
 }
 
 .rs-panel-title {
-	@apply text-lg font-bold;
+  @apply text-lg font-bold;
 }
 .rs-panel {
-	border-bottom: 2px solid;
+  border-bottom: 2px solid;
 }
 .h-80screen {
-	height: 80vh;
+  height: 80vh;
 }
 div.rs-drawer-right.rs-drawer-lg {
-	width: 100%;
+  width: 100%;
 }
 @media (min-width: 768px) {
-	.rs-drawer-right.rs-drawer-lg {
-		width: 968px !important;
-	}
-	input.rs-input {
-		@apply w-60 !important;
-	}
+  .rs-drawer-right.rs-drawer-lg {
+    width: 968px !important;
+  }
+  input.rs-input {
+    @apply w-60 !important;
+  }
 }
 input.rs-input {
-	@apply w-full !important;
+  @apply w-full !important;
 }
 
 .rounded-0 {
-	@apply rounded-none !important;
+  @apply rounded-none !important;
 }
 ul {
-	list-style: none !important;
+  list-style: none !important;
 }
 .rs-control-label {
-	font-weight: 500;
+  font-weight: 500;
 }
