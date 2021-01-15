@@ -81,12 +81,13 @@ export const register = (firstName, lastName, email, password) => (
 		.then((res) => {
 			dispatch(regSuccess);
 			dispatch(getErrors(res.message, null));
+			alertMsg(res.response.data.error);
 		})
 		.catch((err) => {
-			dispatch(regFailed(err, "failed"));
-			dispatch(getErrors(err, "failed"));
+			dispatch(regFailed(err.response.data, err.response.status));
+			dispatch(getErrors(err.response.data, err.response.status));
 
-			alertMsg(err.message + ": Registration Failed");
+			alertMsg(err.response.data.error);
 		});
 };
 
