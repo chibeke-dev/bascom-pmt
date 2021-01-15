@@ -143,8 +143,13 @@ const Header = ({
 										<ul className="list-reset header-nav-right">
 											<li>
 												<Link
+<<<<<<< HEAD
 													to="/Sign-up"
 													className="button button-primary button-wide-mobile button-sm"
+=======
+													to="/sign-up"
+													className="hover:text-white button button-primary button-wide-mobile button-sm"
+>>>>>>> c254b89f1062671f2bae84a560f1ae6894dbdbb1
 													onClick={closeMenu}
 												>
 													Sign up for Free

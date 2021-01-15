@@ -11,7 +11,7 @@ import { Avatar } from "../utilities/Avatar";
  * the wrapping container so match your need.
  * usage: `<Sidebar />`
  */
-class Sidebar extends Component {
+export class Sidebar extends Component {
 	triggerHover() {}
 	render() {
 		return (
@@ -20,7 +20,7 @@ class Sidebar extends Component {
 					<span className="">
 						<Avatar name="maxwell diogu uche" color="green" size="1" />
 					</span>
-					<SidebarIcon to="/" name="Home">
+					<SidebarIcon to="/dashboard" name="Home">
 						<HiHome />
 					</SidebarIcon>
 					<SidebarIcon to="/i/my-task" name="My Task">

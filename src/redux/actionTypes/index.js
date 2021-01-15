@@ -1,2 +1,2 @@
 export * from "./authTypes";
-export * from "./messageTypes";
+export * from "./errorTypes";

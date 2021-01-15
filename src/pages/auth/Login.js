@@ -9,9 +9,16 @@ import {
 	Schema,
 	ButtonToolbar,
 	Button,
+	Alert,
 } from "rsuite";
+<<<<<<< HEAD
 import { Redirect } from "react-router-dom";
 
+=======
+import { Link, Redirect, Router } from "react-router-dom";
+import { login, fakeLogin } from "../../redux/actions";
+import { connect } from "react-redux";
+>>>>>>> c254b89f1062671f2bae84a560f1ae6894dbdbb1
 const { StringType } = Schema.Types;
 
 const model = Schema.Model({
@@ -42,11 +49,13 @@ export class Login extends Component {
 				password: "",
 			},
 			formError: {},
+			loading: false,
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleCheckEmail = this.handleCheckEmail.bind(this);
 	}
 
+<<<<<<< HEAD
 	handleSubmit() {
 		const { formValue } = this.state;
 		if (!this.form.check()) {
@@ -57,6 +66,39 @@ export class Login extends Component {
 			Redirect("../dashboardPages/index");
 		} else {
 			console.log("invalid user");
+=======
+	// handles form submition
+	//TODO: adjust `!this.fom.check()` to return a radable message by users
+	handleSubmit(e) {
+		e.preventDefault();
+		const { formValue } = this.state;
+
+		if (this.form.check()) {
+			this.setState({
+				...this.state,
+				loading: true,
+			});
+			setTimeout(() => {
+				if (
+					!formValue.email !== "admin@gmail.com" &&
+					formValue.password !== "admin1234"
+				) {
+					this.setState({
+						...this.state,
+						loading: false,
+					});
+					Alert.error("Email or password incorrect", 5000);
+				} else {
+					Alert.success("Login Success", 5000);
+					this.props.history.push("/dashboard");
+				}
+			}, 5000);
+			// if (this.props.fakeLogin(formValue.email, formValue.password)) {
+			// 	if (this.props.redirectTo) {
+			// 		<Redirect to={"/" + this.props.redirectTo} />;
+			// 	}
+			// }
+>>>>>>> c254b89f1062671f2bae84a560f1ae6894dbdbb1
 		}
 	}
 
@@ -126,11 +168,36 @@ export class Login extends Component {
 							formValue={formValue}
 							model={model}
 						>
+<<<<<<< HEAD
 							<TextField className="w-70" name="email" label="Email" />
 							<TextField name="password" label="Password" type="password" />
 							<ButtonToolbar>
 								<Button appearance="primary" block onClick={this.handleSubmit}>
 									Submit
+=======
+							<TextField
+								className="rounded-0 w-full"
+								name="email"
+								label="Email"
+								size="lg"
+							/>
+							<TextField
+								className="rounded-0"
+								name="password"
+								label="Password"
+								type="password"
+								size="lg"
+							/>
+							<ButtonToolbar>
+								<Button
+									className="rounded-0"
+									appearance="primary"
+									block
+									loading={this.state.loading}
+									onClick={this.handleSubmit}
+								>
+									Login
+>>>>>>> c254b89f1062671f2bae84a560f1ae6894dbdbb1
 								</Button>
 								{/* <Button onClick={this.handleCheckEmail}>Check Email</Button> */}
 							</ButtonToolbar>
@@ -162,4 +229,15 @@ export class Login extends Component {
 	}
 }
 
-export default Login;
+function mapStateToProps(state) {
+	const { user, loading, redirectTo } = state.auth;
+	const { message, status } = state.error;
+	return {
+		user,
+		loading,
+		message,
+		status,
+		redirectTo,
+	};
+}
+export default connect(mapStateToProps, { login, fakeLogin })(Login);

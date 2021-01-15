@@ -1,5 +1,9 @@
+import { PropTypes } from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
+
 import { Redirect, Route } from "react-router-dom";
+import Application from "../pages/dashboardPages/index";
 
 /**
  * #### AuthRoute Component
@@ -14,12 +18,19 @@ import { Redirect, Route } from "react-router-dom";
  */
 
 //  TODO: Attach redirect message and location to `fromRedirectRef` in login.js
-const AuthRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+const AuthRoute = ({
+	component: Component,
+	isAuthenticated,
+	props,
+	...rest
+}) => (
 	<Route
 		{...rest}
 		render={(props) =>
 			isAuthenticated ? (
-				<Component {...props} />
+				<Application>
+					<Component {...props} />
+				</Application>
 			) : (
 				<Redirect
 					to={{
@@ -32,4 +43,14 @@ const AuthRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 	/>
 );
 
-export default AuthRoute;
+AuthRoute.propTypes = {
+	isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.auth.isAuthenticated,
+	};
+};
+
+export default connect(mapStateToProps)(AuthRoute);

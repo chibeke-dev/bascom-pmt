@@ -28,25 +28,7 @@ const Landing = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location]);
 
-	return (
-		<Router history={history}>
-			<ScrollReveal
-				ref={childRef}
-				children={() => (
-					<Switch>
-						<AppRoute
-							exact
-							path="/home"
-							component={Home}
-							layout={LayoutDefault}
-						/>
-						<Redirect from="/" to="/home" />
-						<Route path="/login" exact component={Login} />
-					</Switch>
-				)}
-			/>
-		</Router>
-	);
+	return <ScrollReveal ref={childRef} children={() => <Home />} />;
 };
 
 export default Landing;

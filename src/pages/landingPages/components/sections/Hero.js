@@ -5,6 +5,7 @@ import ButtonGroup from "../elements/ButtonGroup";
 import Button from "../elements/Button";
 import Image from "../elements/Image";
 import heroImg from "./../../assets/images/features-split-image-01.png";
+import { Link } from "react-router-dom";
 
 const propTypes = {
 	...SectionProps.types,
@@ -72,15 +73,15 @@ const Hero = ({
 							</p>
 							<div className="reveal-from-bottom" data-reveal-delay="600">
 								<ButtonGroup>
-									<Button
-										tag="a"
-										color="primary"
-										className="noHover"
-										wideMobile
-										href="#"
-									>
-										Sign Up for Free
+									<Button color="primary" className="noHover" wideMobile>
+										<Link
+											className="text-white hover:text-white hover:no-underline no-underline"
+											to="/sign-up"
+										>
+											Sign Up for Free
+										</Link>
 									</Button>
+<<<<<<< HEAD
 									<Button
 										tag="a"
 										color="dark"
@@ -89,6 +90,15 @@ const Hero = ({
 										href="/Login"
 									>
 										Login
+=======
+									<Button color="dark" className="noHover" wideMobile>
+										<Link
+											className="text-white hover:no-underline hover:text-white"
+											to="/login"
+										>
+											Login
+										</Link>
+>>>>>>> c254b89f1062671f2bae84a560f1ae6894dbdbb1
 									</Button>
 								</ButtonGroup>
 							</div>

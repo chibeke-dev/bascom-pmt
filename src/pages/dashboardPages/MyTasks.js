@@ -38,7 +38,7 @@ class MyTasks extends Component {
 				<Menubar name="My Task" />
 				<AppContainer>
 					<div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-						<Panel className="border-0 border-b-0 bg-white h-80screen">
+						<Panel className="border-0 border-b-0 border-transparent overflow-y-auto bg-white h-80screen">
 							{" "}
 							<Button color="blue" size="xs">
 								<span className="font-bold text-xl leading-none">+</span> Add

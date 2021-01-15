@@ -1,2 +1,2 @@
 export * from "../actions/authAction";
-export * from "../actions/messageAction";
+export * from "../actions/errorAction";

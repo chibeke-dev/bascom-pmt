@@ -1,88 +1,140 @@
 import {
-	REGISTER_REQUEST,
+	USER_LOADED,
+	USER_LOADING,
+	AUTH_ERROR,
 	REGISTER_SUCCESS,
-	REGISTER_FAILURE,
-	LOGIN_REQUEST,
+	REGISTER_FAIL,
 	LOGIN_SUCCESS,
-	LOGIN_FAILURE,
+	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
-	LOGOUT_FAILURE,
-	LOGOUT_REQUEST,
-} from "../actionTypes/";
+} from "../actionTypes";
 
 import AuthService from "../../services/AuthService";
-import { setMessage } from "./messageAction";
+import { getErrors } from "./";
+import axios from "axios";
+import { Alert } from "rsuite";
+import { Redirect } from "react-router-dom";
+const proxy = "https://bascom-backend.herokuapp.com";
+// check token then load user
+export const login = (email, password) => (dispatch) => {
+	// loading state on user
+	dispatch(userLoading());
+
+	axios
+		.post(proxy + "/users/auth/login", { email: email, password: password })
+		.then((res) => {
+			console.log(res);
+			dispatch(userLoaded(res, "/dashboard"));
+		})
+		.catch((err) => {
+			console.error(err);
+			dispatch(getErrors(err.message, err.status));
+			dispatch(authError());
+			alertMsg(err.message + ": Login Failed");
+		});
+};
+
+export const fakeLogin = (email, password) => (dispatch) => {
+	dispatch(userLoading());
+	loginCheck(email, password)
+		.then((res) => {
+			console.log(res);
+			dispatch(userLoaded(res, "/dashboard"));
+		})
+		.catch((err) => {
+			console.error(err);
+			dispatch(getErrors(err.message, err.status));
+			dispatch(authError());
+			alertMsg(err.message + ": Login Failed");
+			return false;
+		});
+};
+
+async function loginCheck(email, password) {
+	if (email === "admin@admin.com" && password === "adminuser1") {
+		return { email: email, password: password };
+	} else {
+		return false;
+	}
+}
+export const register = (firstName, lastName, email, password) => (
+	dispatch
+) => {
+	dispatch(userLoading());
+	const config = {
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+		},
+	};
+	// const body = JSON.stringify();
+	axios
+		.post(
+			proxy + "/users/signup",
+			{
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				password: password,
+			},
+			config
+		)
+		.then((res) => {
+			dispatch(regSuccess);
+			dispatch(getErrors(res.message, null));
+			alertMsg(res.response.data.error);
+		})
+		.catch((err) => {
+			dispatch(regFailed(err.response.data, err.response.status));
+			dispatch(getErrors(err.response.data, err.response.status));
+
+			alertMsg(err.response.data.error);
+		});
+};
+
+const alertMsg = (msg) => Alert.error(msg, 5000);
 
 // SIGN UP actions
-const registerRequest = () => {
-	return {
-		type: REGISTER_REQUEST,
-	};
-};
-const registerSuccess = (user) => {
+const regSuccess = () => {
 	return {
 		type: REGISTER_SUCCESS,
 	};
 };
-const registerFailure = (error) => {
+const regFailed = () => {
 	return {
-		type: REGISTER_FAILURE,
+		type: REGISTER_FAIL,
+	};
+};
+const userLoading = () => {
+	return {
+		type: USER_LOADING,
+	};
+};
+const userLoaded = (res, redirect) => {
+	return {
+		type: USER_LOADED,
+		payload: res,
+		redirectTo: redirect,
+	};
+};
+const authError = () => {
+	return {
+		type: AUTH_ERROR,
 	};
 };
 
-export const register = ({ firstName, lastName, email, password }, history) => (
-	dispatch
-) => {
-	dispatch(registerRequest());
-	return AuthService.register(firstName, lastName, email, password)
-		.then((res) => {
-			dispatch(registerSuccess());
-			dispatch(setMessage(res));
-		})
-		.catch((err) => {
-			dispatch(registerFailure());
-			dispatch(setMessage(err));
-		});
-};
+export const tokenConfig = (getState) => {
+	// retrieve token
+	const token = getState().auth.token;
 
-const loginRequest = () => {
-	return {
-		type: LOGIN_REQUEST,
-	};
-};
-
-const loginSuccess = (user) => {
-	return {
-		type: LOGIN_SUCCESS,
-		payload: {
-			user,
+	const config = {
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
 		},
 	};
-};
 
-const loginFailure = () => {
-	return {
-		type: LOGIN_FAILURE,
-	};
-};
-
-export const login = ({ email, password }) => (dispatch) => {
-	dispatch(loginRequest());
-	return AuthService.login(email, password)
-		.then((res) => {
-			dispatch(loginSuccess(res.user));
-			dispatch(setMessage(res));
-		})
-		.catch((err) => {
-			dispatch(loginFailure());
-			dispatch(setMessage(err));
-		});
-};
-
-export const logOut = () => (dispatch) => {
-	dispatch({ type: LOGOUT_REQUEST });
-	AuthService.logout();
-	dispatch({
-		type: LOGOUT_SUCCESS,
-	});
+	// check for token
+	if (token) {
+		config.headers["x-access-token"] = token;
+	}
+	return config;
 };
