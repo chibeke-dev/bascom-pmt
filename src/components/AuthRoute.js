@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Redirect, Route } from "react-router-dom";
-import Application from "../pages/dashboardPages/";
+import Application from "../pages/dashboardPages/index";
 
 /**
  * #### AuthRoute Component
